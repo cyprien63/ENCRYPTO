@@ -1,0 +1,39 @@
+========================================
+       ENCRYPTO - Secure File Encryption
+       Information apres installation
+========================================
+
+Merci d'avoir installe ENCRYPTO !
+
+---
+Lancer l'application :
+  ./ENCRYPTO-x86_64.AppImage
+
+---
+Utilisation en CLI :
+  ./ENCRYPTO-x86_64.AppImage --appimage-extract
+  cd squashfs-root
+  python3 src/cli.py encrypt document.pdf -p motdepasse
+  python3 src/cli.py decrypt document.pdf.crypto -p motdepasse
+  python3 src/cli.py inspect document.pdf.crypto
+
+---
+Commandes disponibles :
+  encrypt   Chiffre un fichier ou dossier
+  decrypt   Dechiffre un fichier .crypto
+  inspect   Affiche les metadonnees (nom, hint) sans dechiffrer
+
+---
+Format .crypto :
+  Le fichier .crypto stocke :
+  - Magic number "ENCRYPTO"
+  - Version du format
+  - Sel PBKDF2 (16 octets)
+  - Nonce AES-GCM (12 octets)
+  - Nom original du fichier
+  - Hint de mot de passe (optionnel)
+  - Donnees chiffrees + compressees
+
+---
+Support :
+  https://discord.gg/r3wrxZNddW

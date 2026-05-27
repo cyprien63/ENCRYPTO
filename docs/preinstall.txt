@@ -1,0 +1,30 @@
+========================================
+       ENCRYPTO - Secure File Encryption
+       Information avant installation
+========================================
+
+ENCRYPTO est un outil de chiffrement de fichiers et dossiers
+utilisant AES-256-GCM + PBKDF2 (100 000 iterations) + compression zlib.
+
+---
+Ce que fait ENCRYPTO :
+- Chiffre n'importe quel fichier (PDF, image, video, etc.)
+- Chiffre un dossier entier (archive zip + chiffrement)
+- Dechiffre les fichiers .crypto
+- Interface graphique (webview) + CLI + Kivy
+
+---
+Configuration minimale requise :
+- Linux x86_64 (AppImage autonome)
+- Aucune installation requise (Python, GTK, WebKit inclus)
+
+---
+Securite :
+- AES-256-GCM : chiffrement authentifie
+- PBKDF2-HMAC-SHA256 : 100 000 iterations anti brute-force
+- Sel et nonce aleatoires pour chaque fichier
+- Compression zlib niveau 9 avant chiffrement
+
+---
+Site web / Contact :
+https://discord.gg/r3wrxZNddW

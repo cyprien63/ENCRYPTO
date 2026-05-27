@@ -72,12 +72,16 @@ cp app.py AppDir/opt/ENCRYPTO/
 cp -r src AppDir/opt/ENCRYPTO/
 cp -r web AppDir/opt/ENCRYPTO/
 cp image.png AppDir/opt/ENCRYPTO/
+cp LICENSE.txt AppDir/opt/ENCRYPTO/
+cp docs/preinstall.txt AppDir/opt/ENCRYPTO/
+cp docs/postinstall.txt AppDir/opt/ENCRYPTO/
 
 # Symlink a la racine pour compatibilite
 ln -sf opt/ENCRYPTO/app.py AppDir/app.py
 ln -sf opt/ENCRYPTO/src AppDir/src
 ln -sf opt/ENCRYPTO/web AppDir/web
 ln -sf opt/ENCRYPTO/image.png AppDir/image.png
+ln -sf opt/ENCRYPTO/LICENSE.txt AppDir/LICENSE.txt
 
 # On vire de force les drivers Mesa embarqués pour pas qu'ils entrent en conflit avec le PC
 rm -rf AppDir/usr/lib/x86_64-linux-gnu/dri 2>/dev/null || true
