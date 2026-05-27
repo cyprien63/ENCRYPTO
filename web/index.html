@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENCRYPTO</title>
+    <!-- Google Fonts for premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Titlebar (Custom window decorations, draggable) -->
+    <div id="titlebar" class="pywebview-drag">
+        <button id="btn-start-over" class="hidden">Start Over</button>
+        <div id="app-title">ENCRYPTO</div>
+        <div id="window-controls">
+            <button id="btn-minimize" class="ctrl-btn" title="Minimize">&#9472;</button>
+            <button id="btn-close" class="ctrl-btn close-btn" title="Close">&times;</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="main-container">
+        
+        <!-- STATE 1: MAIN DROP ZONE -->
+        <div id="view-main" class="view active">
+            <div class="view-header">
+                <h1 class="logo-text">ENCRYPTO</h1>
+                <p class="subtitle">Encrypt the Files You Send</p>
+            </div>
+            
+            <div id="drop-zone" class="drop-zone-active">
+                <!-- Drop Default State -->
+                <div id="drop-default" class="drop-state active">
+                    <svg class="arrow-down-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <polyline points="19 12 12 19 5 12"></polyline>
+                    </svg>
+                </div>
+                
+                <!-- Drop Choice State (Add File / Add Folder) -->
+                <div id="drop-choice" class="drop-state">
+                    <div class="split-btn" id="btn-add-file">
+                        <svg class="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="12" y1="18" x2="12" y2="12"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                        <span>Add File...</span>
+                    </div>
+                    <div class="divider-v"></div>
+                    <div class="split-btn" id="btn-add-folder">
+                        <svg class="choice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                            <line x1="12" y1="18" x2="12" y2="12"></line>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                        <span>Add Folder...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-footer">
+                <p id="footer-instruction">Drop or Add Files or Folders to Get Started</p>
+            </div>
+        </div>
+
+        <!-- STATE 2: DETAIL & PASSWORD SETUP -->
+        <div id="view-details" class="view">
+            <div class="details-top">
+                <!-- 3D Box / Folder Icon Container -->
+                <div id="details-icon-wrapper">
+                    <!-- Dynamic File/Folder icon will be set by JS -->
+                </div>
+                <h2 id="details-name" class="file-name-text">filename.ext</h2>
+                <p id="details-size" class="file-size-text">0.00 KB</p>
+            </div>
+            
+            <div class="input-section">
+                <div class="password-field">
+                    <input type="password" id="input-password" placeholder="Password" autocomplete="new-password">
+                    <button id="btn-toggle-password" class="show-password-btn">Show</button>
+                </div>
+                <div class="divider-h"></div>
+                <div class="hint-field">
+                    <input type="text" id="input-hint" placeholder="Hint (optional)">
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="btn-cancel-details" class="btn btn-secondary">Cancel</button>
+                <button id="btn-action-primary" class="btn btn-primary">Encrypt</button>
+            </div>
+        </div>
+
+        <!-- STATE 3: SCANNING ANIMATION -->
+        <div id="view-anim" class="view">
+            <div class="anim-container">
+                <!-- Text / Matrix Background Canvas -->
+                <canvas id="canvas-chars"></canvas>
+                <!-- Spark Particle Canvas -->
+                <canvas id="canvas-sparks"></canvas>
+                
+                <!-- Central Icon wrapper being scanned -->
+                <div id="scanner-icon-container">
+                    <div id="scanner-icon-graphic"></div>
+                    <div id="scanner-icon-text">CRYPTO</div>
+                </div>
+            </div>
+            
+            <div class="anim-status-section">
+                <h3 id="anim-filename" class="anim-file-text">test</h3>
+                <p id="anim-subtitle">Less than a minute</p>
+                <div id="progress-percent">0%</div>
+            </div>
+            
+            <div class="anim-footer">
+                <button id="btn-stop-anim" class="btn btn-secondary">Stop</button>
+            </div>
+        </div>
+
+        <!-- STATE 4: OPERATION COMPLETED -->
+        <div id="view-done" class="view">
+            <div class="done-top">
+                <div id="done-icon-wrapper">
+                    <!-- SVG Document Lock Icon / Decrypted File Icon -->
+                </div>
+                <h2 id="done-name" class="file-name-text">filename.ext.crypto</h2>
+            </div>
+            
+            <div class="done-footer">
+                <button id="btn-save-as" class="btn btn-primary btn-large">Save As...</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Background Glow for Glassmorphism Look -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <script src="icons_library.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

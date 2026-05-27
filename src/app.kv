@@ -1,0 +1,293 @@
+#:kivy 2.2.0
+
+<MainScreen>:
+    name: "main"
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.05, 0.05, 0.05, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget:
+            size_hint_y: 0.15
+
+        Label:
+            text: "ENCRYPTO"
+            font_size: "36sp"
+            bold: True
+            color: "#f3c845"
+            size_hint_y: 0.2
+
+        Label:
+            text: "Encrypt the Files You Send"
+            font_size: "14sp"
+            color: "#8a8a8f"
+            size_hint_y: 0.1
+
+        Widget:
+            size_hint_y: 0.05
+
+        Button:
+            text: "SELECT FILE"
+            size_hint_y: 0.15
+            background_color: "#f3c845"
+            color: "#000000"
+            font_size: "16sp"
+            bold: True
+            on_release: app.show_browser()
+
+        Button:
+            text: "SELECT FOLDER"
+            size_hint_y: 0.15
+            background_color: "#f3c845"
+            color: "#000000"
+            font_size: "16sp"
+            bold: True
+            on_release: app.show_browser()
+
+        Widget:
+            size_hint_y: 0.2
+
+        Label:
+            text: "Built with Kivy"
+            font_size: "10sp"
+            color: "#555555"
+            size_hint_y: 0.05
+
+
+<BrowserScreen>:
+    name: "browser"
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: 0.05, 0.05, 0.05, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint_y: 0.08
+            padding: [10, 5]
+            spacing: 5
+
+            Button:
+                text: "< Back"
+                size_hint_x: 0.25
+                background_color: "#333333"
+                color: "#ffffff"
+                font_size: "12sp"
+                on_release: app.go_main()
+
+            Label:
+                text: root.current_path
+                font_size: "11sp"
+                color: "#cccccc"
+                text_size: self.size
+                halign: "center"
+                valign: "middle"
+                shorten: True
+
+        ScrollView:
+            BoxLayout:
+                id: entries_layout
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 1
+
+
+<DetailScreen>:
+    name: "detail"
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.05, 0.05, 0.05, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint_y: 0.1
+
+        Label:
+            text: root.file_name
+            font_size: "16sp"
+            bold: True
+            color: "#ffffff"
+            size_hint_y: 0.1
+            shorten: True
+
+        Label:
+            text: root.file_size
+            font_size: "12sp"
+            color: "#8a8a8f"
+            size_hint_y: 0.05
+
+        Widget:
+            size_hint_y: 0.05
+
+        BoxLayout:
+            id: hint_box
+            orientation: "vertical"
+            size_hint_y: 0.4
+            spacing: 5
+
+            TextInput:
+                id: password_input
+                hint_text: "Password"
+                password: True
+                multiline: False
+                font_size: "16sp"
+                size_hint_y: 0.5
+                background_color: "#f3c845"
+                foreground_color: "#000000"
+                padding: [15, 10]
+
+            TextInput:
+                id: hint_input
+                hint_text: "Hint (optional)"
+                multiline: False
+                font_size: "14sp"
+                size_hint_y: 0.5
+                background_color: "#f5cf5c"
+                foreground_color: "#000000"
+                padding: [15, 10]
+
+        Widget:
+            size_hint_y: 0.1
+
+        Button:
+            id: action_btn
+            text: "ENCRYPT"
+            size_hint_y: 0.12
+            background_color: "#f3c845"
+            color: "#000000"
+            font_size: "16sp"
+            bold: True
+            on_release: root.do_action()
+
+        Button:
+            text: "Cancel"
+            size_hint_y: 0.08
+            background_color: "#333333"
+            color: "#ffffff"
+            font_size: "12sp"
+            on_release: app.go_main()
+
+
+<ProgressScreen>:
+    name: "progress"
+    BoxLayout:
+        orientation: "vertical"
+        padding: 30
+        spacing: 15
+        canvas.before:
+            Color:
+                rgba: 0.05, 0.05, 0.05, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget:
+            size_hint_y: 0.2
+
+        Label:
+            text: root.file_name
+            font_size: "16sp"
+            color: "#ffffff"
+            shorten: True
+
+        Label:
+            text: "Processing..."
+            font_size: "12sp"
+            color: "#8a8a8f"
+
+        Widget:
+            size_hint_y: 0.1
+
+        ProgressBar:
+            value: root.progress
+            max: 100
+            size_hint_y: 0.08
+
+        Label:
+            text: "{}%".format(int(root.progress))
+            font_size: "32sp"
+            bold: True
+            color: "#f3c845"
+
+        Widget:
+            size_hint_y: 0.3
+
+        Button:
+            text: "Cancel"
+            size_hint_y: 0.1
+            background_color: "#333333"
+            color: "#ffffff"
+            on_release: app.go_main()
+
+
+<DoneScreen>:
+    name: "done"
+    BoxLayout:
+        orientation: "vertical"
+        padding: 30
+        spacing: 15
+        canvas.before:
+            Color:
+                rgba: 0.05, 0.05, 0.05, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Widget:
+            size_hint_y: 0.25
+
+        Label:
+            text: "Completed!"
+            font_size: "28sp"
+            bold: True
+            color: "#f3c845"
+
+        Label:
+            text: root.result_name
+            font_size: "14sp"
+            color: "#ffffff"
+            shorten: True
+
+        Widget:
+            size_hint_y: 0.1
+
+        Button:
+            text: "SAVE TO OUTPUT FOLDER"
+            size_hint_y: 0.12
+            background_color: "#f3c845"
+            color: "#000000"
+            font_size: "14sp"
+            bold: True
+            on_release: app.save_result()
+
+        Button:
+            text: "Start Over"
+            size_hint_y: 0.08
+            background_color: "#333333"
+            color: "#ffffff"
+            font_size: "12sp"
+            on_release: app.go_main()
+
+
+<ScreenManager>:
+    MainScreen:
+    BrowserScreen:
+    DetailScreen:
+    ProgressScreen:
+    DoneScreen:

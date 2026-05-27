@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+*.spec
+
+# Virtual environments
+.venv/
+.venv_linux/
+
+# Build artifacts
+AppDir/
+squashfs-root/
+.build_staging/
+.build_recipe/
+appimagetool-x86_64.AppImage
+appimagetool-x86_64.AppImage.1
+*.AppImage
+
+# PyInstaller build output
+build/ENCRYPTO/
+
+# Build output
+version compiler/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
